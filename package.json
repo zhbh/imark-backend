@@ -1,0 +1,24 @@
+{
+  "name": "imark-backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npx tsc",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\""
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.19.2",
+    "http-errors": "~1.6.3",
+    "jade": "^0.29.0",
+    "mongoose": "^8.5.2",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.2",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.4",
+    "typescript": "^5.5.4"
+  }
+}
