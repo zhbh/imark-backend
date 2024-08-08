@@ -12,21 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Events = void 0;
-const mongoose_1 = __importDefault(require("mongoose"));
-const eventsModel_1 = __importDefault(require("./eventsModel"));
-var uri = "mongodb://test:test@ac-agmggzi-shard-00-00.6cniiol.mongodb.net:27017,ac-agmggzi-shard-00-01.6cniiol.mongodb.net:27017,ac-agmggzi-shard-00-02.6cniiol.mongodb.net:27017/?ssl=true&replicaSet=atlas-llj3gt-shard-0&authSource=admin&retryWrites=true&w=majority&appName=imark-cluster";
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield mongoose_1.default.connect(uri);
-    });
-}
-main()
-    .then((res) => {
-    console.log("mongo connected success");
-})
-    .catch(() => {
-    console.log("mongo connected fail");
-});
-const Events = mongoose_1.default.model("Events", eventsModel_1.default);
-exports.Events = Events;
+const express_1 = __importDefault(require("express"));
+const model_1 = require("../model");
+var router = express_1.default.Router();
+router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const eventsModel = new model_1.Events(req.body);
+    console.log("🚀 ~ router.post ~ req.body:", req.body);
+    const events = yield eventsModel.save();
+    return res.status(200).json({ message: 'Add the event successfully.' });
+}));
+router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { current = 1, pageSize = 10, name, category } = req.query;
+    const total = yield model_1.Events.countDocuments(Object.assign(Object.assign({}, (name && { name })), (category && { category })));
+    console.log("🚀 ~ router.get ~ total:", total);
+}));
+exports.default = router;
