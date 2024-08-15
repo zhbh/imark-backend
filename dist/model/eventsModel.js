@@ -18,15 +18,16 @@ const eventsSchema = new mongoose_1.default.Schema({
     },
     expirationTime: {
         type: Number,
+        required: true,
     },
     // category: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'Category',
     // },
-    // location: {
-    //     type: Number,
-    //     default: 0,
-    // },
+    location: {
+        type: String,
+        default: "0,0",
+    },
     createTime: {
         type: Number,
         default: Date.now(),
