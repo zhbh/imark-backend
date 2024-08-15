@@ -12,12 +12,58 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 router.get('/', async (req: Request, res: Response) => {
-  const { current = 1, pageSize = 10, name, category } = req.query;
+  const { current = 1, pageSize = 10, title, content } = req.query;
   const total = await Events.countDocuments({
-    ...(name && { name }),
-    ...(category && { category }),
+    ...(title && { title }),
+    ...(content && { content }),
   });
-  console.log("🚀 ~ router.get ~ total:", total) 
+  console.log("🚀 ~ router.get ~ total:", total)
+
+  const data = await Events.find({
+    ...(title && { title: new RegExp(`${title}`, "i") }),
+    ...(content && { content: new RegExp(`${content}`, "i") }),
+  })
+    .sort({ expirationTime: -1 })
+    .skip((Number(current) - 1) * Number(pageSize))
+    .limit(Number(pageSize));
+
+  console.log("🚀 ~ router.get ~ data:", data)
+
+  return res.status(200).json({ data, total });
+});
+
+router.get('/:id', async (req: Request, res: Response) => {
+  const record = await Events.findOne({ _id: req.params.id });
+  console.log("🚀 ~ router.get ~ record:", record)
+
+  if (record) {
+    res.status(200).json({ data: record, success: true });
+  } else {
+    res.status(500).json({ message: 'The event does not exist.' });
+  }
+});
+
+router.put('/:id', async (req: Request, res: Response) => {
+  try {
+    await Events.findOneAndUpdate({ _id: req.params.id }, req.body);
+    console.log("🚀 ~ router.put ~ req.body:", req.body)
+
+    return res.status(200).json();
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+});
+
+router.delete('/:id', async (req: Request, res: Response) => {
+  const record = await Events.findById(req.params.id);
+  console.log("🚀 ~ router.delete ~ record:", record)
+
+  if (record) {
+    await record.deleteOne({ _id: req.params.id });
+    res.status(200).json({ success: true });
+  } else {
+    res.status(500).json({ message: 'The event does not exist.' });
+  }
 });
 
 export default router;

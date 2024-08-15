@@ -22,8 +22,45 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(200).json({ message: 'Add the event successfully.' });
 }));
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { current = 1, pageSize = 10, name, category } = req.query;
-    const total = yield model_1.Events.countDocuments(Object.assign(Object.assign({}, (name && { name })), (category && { category })));
+    const { current = 1, pageSize = 10, title, content } = req.query;
+    const total = yield model_1.Events.countDocuments(Object.assign(Object.assign({}, (title && { title })), (content && { content })));
     console.log("🚀 ~ router.get ~ total:", total);
+    const data = yield model_1.Events.find(Object.assign(Object.assign({}, (title && { title: new RegExp(`${title}`, "i") })), (content && { content: new RegExp(`${content}`, "i") })))
+        .sort({ expirationTime: -1 })
+        .skip((Number(current) - 1) * Number(pageSize))
+        .limit(Number(pageSize));
+    console.log("🚀 ~ router.get ~ data:", data);
+    return res.status(200).json({ data, total });
+}));
+router.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const record = yield model_1.Events.findOne({ _id: req.params.id });
+    console.log("🚀 ~ router.get ~ record:", record);
+    if (record) {
+        res.status(200).json({ data: record, success: true });
+    }
+    else {
+        res.status(500).json({ message: 'The event does not exist.' });
+    }
+}));
+router.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield model_1.Events.findOneAndUpdate({ _id: req.params.id }, req.body);
+        console.log("🚀 ~ router.put ~ req.body:", req.body);
+        return res.status(200).json();
+    }
+    catch (error) {
+        return res.status(500).json({ error });
+    }
+}));
+router.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const record = yield model_1.Events.findById(req.params.id);
+    console.log("🚀 ~ router.delete ~ record:", record);
+    if (record) {
+        yield record.deleteOne({ _id: req.params.id });
+        res.status(200).json({ success: true });
+    }
+    else {
+        res.status(500).json({ message: 'The event does not exist.' });
+    }
 }));
 exports.default = router;
