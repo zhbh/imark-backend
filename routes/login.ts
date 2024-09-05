@@ -9,7 +9,9 @@ router.post('/', async (req: Request, res: Response) => {
     console.log("🚀 ~ router.post ~ user:", user)
 
     if (!user) return res.status(500).json({ message: 'The username or he password is not correct' });
-    
+
+    if (user.status == "off") return res.status(500).json({ message: 'The user is forbidden to log in' });
+
     const data = user?.toJSON();
     delete data?.password;
 

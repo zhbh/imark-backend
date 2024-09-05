@@ -20,10 +20,6 @@ const eventsSchema = new mongoose_1.default.Schema({
         type: Number,
         required: true,
     },
-    // category: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Category',
-    // },
     location: {
         type: String,
         default: "0,0",
@@ -31,6 +27,10 @@ const eventsSchema = new mongoose_1.default.Schema({
     createTime: {
         type: Number,
         default: Date.now(),
+    },
+    user: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: "User",
     },
 });
 exports.default = eventsSchema;

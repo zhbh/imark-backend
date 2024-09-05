@@ -22,10 +22,16 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(200).json({ message: 'Add the event successfully.' });
 }));
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { current = 1, pageSize = 10, title, content } = req.query;
-    const total = yield model_1.Events.countDocuments(Object.assign(Object.assign({}, (title && { title })), (content && { content })));
+    const { current = 1, pageSize = 10, title, content, user } = req.query;
+    console.log("🚀 ~ router.get ~ user:", user);
+    const session = req.session;
+    let currentUser = user;
+    if (session.user && session.user.role === "user") {
+        currentUser = session.user._id;
+    }
+    const total = yield model_1.Events.countDocuments(Object.assign(Object.assign(Object.assign({}, (currentUser && { currentUser })), (title && { title })), (content && { content })));
     console.log("🚀 ~ router.get ~ total:", total);
-    const data = yield model_1.Events.find(Object.assign(Object.assign({}, (title && { title: new RegExp(`${title}`, "i") })), (content && { content: new RegExp(`${content}`, "i") })))
+    const data = yield model_1.Events.find(Object.assign(Object.assign(Object.assign({}, (currentUser && { user: currentUser })), (title && { title: new RegExp(`${title}`, "i") })), (content && { content: new RegExp(`${content}`, "i") })))
         .sort({ expirationTime: -1 })
         .skip((Number(current) - 1) * Number(pageSize))
         .limit(Number(pageSize));

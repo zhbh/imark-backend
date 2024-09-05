@@ -28,7 +28,11 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 }));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { current, pageSize, name, status } = req.query;
+    const { current, pageSize, name, status, user } = req.query;
+    const session = req.session;
+    if (session.user && session.user.role === "user") {
+        return res.status(501).json({ message: "Permission denied." });
+    }
     try {
         const allData = yield model_1.User.find(Object.assign(Object.assign({}, (name && { name: new RegExp(`${name}`, "i") })), (status && { status })));
         const data = yield model_1.User.find(Object.assign(Object.assign({}, (name && { name: new RegExp(`${name}`, "i") })), (status && { status })))

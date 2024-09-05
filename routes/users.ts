@@ -18,7 +18,12 @@ router.post("/", async (req: Request, res: Response) => {
 });
 
 router.get("/", async (req: Request, res: Response) => {
-  const { current, pageSize, name, status } = req.query;
+  const { current, pageSize, name, status, user } = req.query;
+
+  const session = req.session as any;
+  if (session.user && session.user.role === "user") {
+    return res.status(501).json({ message: "Permission denied." });
+  }
 
   try {
     const allData = await User.find({

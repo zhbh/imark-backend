@@ -16,10 +16,6 @@ const eventsSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    // category: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Category',
-    // },
     location: {
         type: String,
         default: "0,0",
@@ -27,6 +23,10 @@ const eventsSchema = new mongoose.Schema({
     createTime: {
         type: Number,
         default: Date.now(),
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
     },
 });
 

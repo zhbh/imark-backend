@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const bookSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -30,4 +30,4 @@ const bookSchema = new mongoose.Schema({
   },
 });
 
-export default bookSchema;
+export default userSchema;
