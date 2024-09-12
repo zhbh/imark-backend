@@ -8,12 +8,12 @@ router.post('/', async (req: Request, res: Response) => {
   console.log("🚀 ~ router.post ~ req.body:", req.body)
 
   const events = await eventsModel.save();
-  
+
   return res.status(200).json({ message: 'Add the event successfully.' });
 });
 
 router.get('/', async (req: Request, res: Response) => {
-  const { current = 1, pageSize = 10, title, content, user } = req.query;
+  const { current = 1, pageSize = 10, title, content, user, category } = req.query;
   console.log("🚀 ~ router.get ~ user:", user)
 
   const session = req.session as any;
@@ -26,6 +26,7 @@ router.get('/', async (req: Request, res: Response) => {
     ...(currentUser && { currentUser }),
     ...(title && { title }),
     ...(content && { content }),
+    ...(category && { category }),
   });
   console.log("🚀 ~ router.get ~ total:", total)
 
@@ -33,6 +34,7 @@ router.get('/', async (req: Request, res: Response) => {
     ...(currentUser && { user: currentUser }),
     ...(title && { title: new RegExp(`${title}`, "i") }),
     ...(content && { content: new RegExp(`${content}`, "i") }),
+    ...(category && { category }),
   })
     .sort({ expirationTime: -1 })
     .skip((Number(current) - 1) * Number(pageSize))

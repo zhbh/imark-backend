@@ -16,6 +16,10 @@ const eventsSchema = new mongoose_1.default.Schema({
     contact: {
         type: String,
     },
+    category: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: "Category",
+    },
     expirationTime: {
         type: Number,
         required: true,
