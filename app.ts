@@ -10,6 +10,7 @@ import logoutRouter from "./routes/logout";
 import registerRouter from "./routes/register";
 import eventsRouter from "./routes/events";
 import usersRouter from "./routes/users";
+import categoryRouter from "./routes/category";
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use("/api/logout", logoutRouter);
 app.use("/api/register", registerRouter);
 app.use("/api/event", eventsRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/category", categoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

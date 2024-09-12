@@ -14,6 +14,7 @@ const logout_1 = __importDefault(require("./routes/logout"));
 const register_1 = __importDefault(require("./routes/register"));
 const events_1 = __importDefault(require("./routes/events"));
 const users_1 = __importDefault(require("./routes/users"));
+const category_1 = __importDefault(require("./routes/category"));
 var app = (0, express_1.default)();
 // view engine setup
 app.set('views', path_1.default.join(__dirname, 'views'));
@@ -42,6 +43,7 @@ app.use("/api/logout", logout_1.default);
 app.use("/api/register", register_1.default);
 app.use("/api/event", events_1.default);
 app.use("/api/users", users_1.default);
+app.use("/api/category", category_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
