@@ -22,11 +22,11 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(200).json({ message: 'Add the event successfully.' });
 }));
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { current = 1, pageSize = 10, title, content, user, category } = req.query;
+    const { current = 1, pageSize = 10, title, content, user, category, all } = req.query;
     console.log("🚀 ~ router.get ~ user:", user);
     const session = req.session;
-    let currentUser = user;
-    if (session.user && session.user.role === "user") {
+    let currentUser = all ? null : user;
+    if (!all && session.user && session.user.role === "user") {
         currentUser = session.user._id;
     }
     const total = yield model_1.Events.countDocuments(Object.assign(Object.assign(Object.assign(Object.assign({}, (currentUser && { currentUser })), (title && { title })), (content && { content })), (category && { category })));

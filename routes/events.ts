@@ -13,12 +13,12 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 router.get('/', async (req: Request, res: Response) => {
-  const { current = 1, pageSize = 10, title, content, user, category } = req.query;
+  const { current = 1, pageSize = 10, title, content, user, category, all } = req.query;
   console.log("🚀 ~ router.get ~ user:", user)
 
   const session = req.session as any;
-  let currentUser = user;
-  if (session.user && session.user.role === "user") {
+  let currentUser = all ? null : user;
+  if (!all && session.user && session.user.role === "user") {
     currentUser = session.user._id;
   }
 
