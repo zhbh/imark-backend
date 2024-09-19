@@ -18,7 +18,7 @@ var router = express_1.default.Router();
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, pageSize, current } = req.query;
     const total = yield model_1.Category.countDocuments(req.body);
-    const data = yield model_1.Category.find(Object.assign({}, (name && { name })))
+    const data = yield model_1.Category.find(Object.assign({}, (name && { name: new RegExp(`${name}`, "i") })))
         .skip((Number(current) - 1) * Number(pageSize))
         .sort({ updatedAt: -1 });
     return res.status(200).json({ data, success: true, total });

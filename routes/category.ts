@@ -9,7 +9,7 @@ router.get("/", async (req: Request, res: Response) => {
   const total = await Category.countDocuments(req.body);
 
   const data = await Category.find({
-    ...(name && { name }),
+    ...(name && { name: new RegExp(`${name}`, "i") }),
   })
     .skip((Number(current) - 1) * Number(pageSize))
     .sort({ updatedAt: -1 });
