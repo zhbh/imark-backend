@@ -33,7 +33,7 @@ app.use(
 );
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  if (!req.url.includes("/login") && !req.url.includes("/logout") && !req.url.includes("/register")) {
+  if (!req.url.includes("/") && !req.url.includes("/login") && !req.url.includes("/logout") && !req.url.includes("/register")) {
     if (!(req.session as any).user) {
       return res.status(401).json({ message: "Please log in" });
     }

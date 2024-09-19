@@ -31,7 +31,7 @@ app.use((0, express_session_1.default)({
     cookie: { maxAge: 60 * 60 * 24 * 1000 },
 }));
 app.use((req, res, next) => {
-    if (!req.url.includes("/login") && !req.url.includes("/logout") && !req.url.includes("/register")) {
+    if (!req.url.includes("/") && !req.url.includes("/login") && !req.url.includes("/logout") && !req.url.includes("/register")) {
         if (!req.session.user) {
             return res.status(401).json({ message: "Please log in" });
         }

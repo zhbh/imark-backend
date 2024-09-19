@@ -4,7 +4,7 @@ import { Category } from "../model";
 var router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
-  const { name, level, pageSize, current } = req.query;
+  const { name, pageSize, current } = req.query;
 
   const total = await Category.countDocuments(req.body);
 

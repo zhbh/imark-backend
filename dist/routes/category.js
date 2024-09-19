@@ -16,7 +16,7 @@ const express_1 = __importDefault(require("express"));
 const model_1 = require("../model");
 var router = express_1.default.Router();
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, level, pageSize, current } = req.query;
+    const { name, pageSize, current } = req.query;
     const total = yield model_1.Category.countDocuments(req.body);
     const data = yield model_1.Category.find(Object.assign({}, (name && { name })))
         .skip((Number(current) - 1) * Number(pageSize))
