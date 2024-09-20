@@ -36,7 +36,7 @@ router.get('/', async (req: Request, res: Response) => {
     ...(content && { content: new RegExp(`${content}`, "i") }),
     ...(category && { category }),
   })
-    .sort({ expirationTime: -1 })
+    .sort({ createTime: -1 })
     .skip((Number(current) - 1) * Number(pageSize))
     .limit(Number(pageSize));
 
