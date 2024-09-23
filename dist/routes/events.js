@@ -32,6 +32,7 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const total = yield model_1.Events.countDocuments(Object.assign(Object.assign(Object.assign(Object.assign({}, (currentUser && { currentUser })), (title && { title })), (content && { content })), (category && { category })));
     console.log("🚀 ~ router.get ~ total:", total);
     const data = yield model_1.Events.find(Object.assign(Object.assign(Object.assign(Object.assign({}, (currentUser && { user: currentUser })), (title && { title: new RegExp(`${title}`, "i") })), (content && { content: new RegExp(`${content}`, "i") })), (category && { category })))
+        .populate('category')
         .sort({ createTime: -1 })
         .skip((Number(current) - 1) * Number(pageSize))
         .limit(Number(pageSize));

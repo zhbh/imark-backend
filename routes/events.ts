@@ -36,6 +36,7 @@ router.get('/', async (req: Request, res: Response) => {
     ...(content && { content: new RegExp(`${content}`, "i") }),
     ...(category && { category }),
   })
+    .populate('category')
     .sort({ createTime: -1 })
     .skip((Number(current) - 1) * Number(pageSize))
     .limit(Number(pageSize));
