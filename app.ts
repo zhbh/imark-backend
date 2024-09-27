@@ -9,7 +9,7 @@ import loginRouter from "./routes/login";
 import logoutRouter from "./routes/logout";
 import registerRouter from "./routes/register";
 import eventsRouter from "./routes/events";
-import usersRouter from "./routes/users";
+import usersRouter from "./routes/user";
 import categoryRouter from "./routes/category";
 import favoriteRouter from "./routes/favorite";
 
@@ -46,7 +46,7 @@ app.use("/api/login", loginRouter);
 app.use("/api/logout", logoutRouter);
 app.use("/api/register", registerRouter);
 app.use("/api/event", eventsRouter);
-app.use("/api/users", usersRouter);
+app.use("/api/user", usersRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/favorite", favoriteRouter);
 
