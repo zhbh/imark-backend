@@ -5,7 +5,8 @@
   "scripts": {
     "build": "npx tsc",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
-    "test": "mocha"
+    "test": "mocha",
+    "postbuild": "chmod +x bin/postbuild.sh && ./bin/postbuild.sh"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
