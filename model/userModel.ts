@@ -13,12 +13,15 @@ const userSchema = new mongoose.Schema({
   },
   sex: {
     type: String,
+    default: "male"
   },
   status: {
     type: String,
+    default: "on",
   },
   role: {
     type: String,
+    default: "user",
   },
   createdTime: {
     type: Number,

@@ -53,10 +53,7 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
     res.status(500).json({ message: err.message });
 });
-app.listen(3001, () => {
-    console.log(`⚡️[server]: Server is running at http://localhost:${3001}`);
-});
-module.exports = app;
+exports.default = app;
 function createError(arg0) {
     throw new Error("Function not implemented.");
 }
