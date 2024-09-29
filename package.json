@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "npx tsc",
+    "start": "ts-node index.ts",
+    "serve": "node dist/index.js",
+    "build": "tsc",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "test": "mocha",
     "postbuild": "chmod +x bin/postbuild.sh && ./bin/postbuild.sh"
