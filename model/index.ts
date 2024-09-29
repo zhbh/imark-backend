@@ -4,12 +4,11 @@ import userSchema from "./userModel";
 import categorySchema from "./categoryModel";
 import favoriteSchema from "./favoriteModel";
 
-import dotenvx from "@dotenvx/dotenvx"; 
-dotenvx.configDotenv();
+import dotenv from "dotenv"; 
+dotenv.configDotenv();
 
 async function main() {
-    const uri = dotenvx.get("MONGODB_URI");
-    await mongoose.connect( uri?.toString() || "");
+    await mongoose.connect( process.env.MONGODB_URI || "");
 }
 
 main()
