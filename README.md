@@ -35,6 +35,16 @@ iMark – the Map-based Information Distribution System
 - Log out
 - Sign up
 
+## Configuration
+
+### Development environment
+Create a file `.env` in the root directory, and configure the following environment variables:
+- MongoDB
+
+```bash
+MONGODB_URI=
+```
+
 ## Getting Started
 
 First, install noed modules:
