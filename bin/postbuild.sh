@@ -1,5 +1,7 @@
 #!/bin/bash
 
+touch .env
+
 rm -rf ./.amplify-hosting
 
 mkdir -p ./.amplify-hosting/compute
