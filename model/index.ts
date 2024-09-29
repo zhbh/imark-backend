@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 async function main() {
-    await mongoose.connect( process.env.MONGODB_URI || "");
+    await mongoose.connect( "mongodb://test:test@ac-agmggzi-shard-00-00.6cniiol.mongodb.net:27017,ac-agmggzi-shard-00-01.6cniiol.mongodb.net:27017,ac-agmggzi-shard-00-02.6cniiol.mongodb.net:27017/?ssl=true&replicaSet=atlas-llj3gt-shard-0&authSource=admin&retryWrites=true&w=majority&appName=imark-cluster" || "");
 }
 
 main()
