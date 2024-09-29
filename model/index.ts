@@ -4,7 +4,7 @@ import userSchema from "./userModel";
 import categorySchema from "./categoryModel";
 import favoriteSchema from "./favoriteModel";
 
-import dotenv from 'dotenv'; 
+import dotenv from "dotenv"; 
 dotenv.config();
 
 async function main() {
