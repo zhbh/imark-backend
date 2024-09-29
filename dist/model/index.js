@@ -18,10 +18,11 @@ const eventsModel_1 = __importDefault(require("./eventsModel"));
 const userModel_1 = __importDefault(require("./userModel"));
 const categoryModel_1 = __importDefault(require("./categoryModel"));
 const favoriteModel_1 = __importDefault(require("./favoriteModel"));
-var uri = "mongodb://test:test@ac-agmggzi-shard-00-00.6cniiol.mongodb.net:27017,ac-agmggzi-shard-00-01.6cniiol.mongodb.net:27017,ac-agmggzi-shard-00-02.6cniiol.mongodb.net:27017/?ssl=true&replicaSet=atlas-llj3gt-shard-0&authSource=admin&retryWrites=true&w=majority&appName=imark-cluster";
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield mongoose_1.default.connect(uri);
+        yield mongoose_1.default.connect(process.env.MONGODB_URI || "");
     });
 }
 main()

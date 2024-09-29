@@ -4,10 +4,11 @@ import userSchema from "./userModel";
 import categorySchema from "./categoryModel";
 import favoriteSchema from "./favoriteModel";
 
-var uri = "mongodb://test:test@ac-agmggzi-shard-00-00.6cniiol.mongodb.net:27017,ac-agmggzi-shard-00-01.6cniiol.mongodb.net:27017,ac-agmggzi-shard-00-02.6cniiol.mongodb.net:27017/?ssl=true&replicaSet=atlas-llj3gt-shard-0&authSource=admin&retryWrites=true&w=majority&appName=imark-cluster";
+import dotenv from 'dotenv'; 
+dotenv.config();
 
 async function main() {
-    await mongoose.connect(uri);
+    await mongoose.connect( process.env.MONGODB_URI || "");
 }
 
 main()
