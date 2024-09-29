@@ -50,9 +50,14 @@ npm run dev
 
 Server is running at [http://localhost:3000](http://localhost:3000).
 
-## Other commands
+## Deployment
 
 ```bash
-npm run build //deploy to server
-npm run test //test user cases
+npm run build
+```
+
+## Testing
+
+```bash
+npm run test
 ```
