@@ -5,10 +5,11 @@ import categorySchema from "./categoryModel";
 import favoriteSchema from "./favoriteModel";
 
 import dotenvx from "@dotenvx/dotenvx"; 
-dotenvx.config();
+dotenvx.configDotenv();
 
 async function main() {
-    await mongoose.connect( process.env.MONGODB_URI || "");
+    const uri = dotenvx.get("MONGODB_URI");
+    await mongoose.connect( uri?.toString() || "");
 }
 
 main()
