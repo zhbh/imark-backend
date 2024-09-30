@@ -2,7 +2,7 @@
 iMark – the Map-based Information Distribution System
 
 - You post an event based on the location, and this event is displayed on the map.
-- There are many topics (categories) you interested, like marketplace, jobs, rental market and sports and so on.
+- There are many topics (categories), like marketplace, jobs, rental market and sports and so on.
 - You can search related events to view, and share and favourite them.
 
 ## Features
@@ -47,7 +47,7 @@ MONGODB_URI=
 
 ## Getting Started
 
-First, install noed modules:
+First, install node modules:
 ```bash
 npm install
 ```
