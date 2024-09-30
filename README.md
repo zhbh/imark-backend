@@ -45,7 +45,7 @@ Create a file `.env` in the root directory, and configure the following environm
 MONGODB_URI=
 ```
 
-## Getting Started
+## Launch local server
 
 First, install node modules:
 ```bash
