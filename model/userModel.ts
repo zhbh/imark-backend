@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
   },
   sex: {
     type: String,
-    default: "male"
   },
   status: {
     type: String,
