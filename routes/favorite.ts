@@ -21,7 +21,7 @@ router.get("/", async (req: Request, res: Response) => {
     // ...(category && { category }),
   });
 
-  if (all != null && all) {
+  if (all != null && all === "true") {
     const data = await Favorite.find({
       ...(currentUser && { user: currentUser }),
       // ...(title && { title: new RegExp(`${title}`, "i") }),

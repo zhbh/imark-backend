@@ -34,7 +34,16 @@ app.use(
 );
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  if (!req.url.includes("/") && !req.url.includes("/login") && !req.url.includes("/logout") && !req.url.includes("/register")) {
+  const referer = req.get('Referer'); 
+  if (!referer) {
+    res.send({ message: 'Referer is empty.' });
+    return;
+  }
+
+  const path = new URL(referer);
+  console.log("🚀 ~ app.use ~ path :", path )
+
+  if (!(path.pathname === "/") && !req.url.includes("/login") && !req.url.includes("/logout") && !req.url.includes("/register")) {
     if (!(req.session as any).user) {
       return res.status(401).json({ message: "Please log in" });
     }
@@ -59,7 +68,8 @@ app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
   res.status(500).json({ message: err.message });
 });
 
-export default app;
 function createError(arg0: number): any {
   throw new Error("Function not implemented.");
 }
+
+export default app;
