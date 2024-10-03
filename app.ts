@@ -32,7 +32,7 @@ app.use(
     secret: "abc123",
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 24 * 1000 },
+    cookie: { secure: process.env.SYS_ENV === "production", maxAge: 60 * 60 * 24 * 1000 },
   })
 );
 
@@ -46,7 +46,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   const path = new URL(referer);
   console.log("🚀 ~ app.use ~ path :", path)
 
-  if (!req.url.includes("/login") && !req.url.includes("/logout") && !req.url.includes("/register")) {
+  if (!(path.pathname === "/") && !req.url.includes("/login") && !req.url.includes("/logout") && !req.url.includes("/register")) {
     if (!(req.session as any).user) {
       return res.status(401).json({ message: "Please log in" });
     }
