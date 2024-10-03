@@ -39,12 +39,12 @@ iMark – the Map-based Information Distribution System
 
 ### Development environment
 Create a file `.env` in the root directory, and configure the following environment variables:
-- process.env.ENV 
+- process.env.SYS_ENV 
     - parameter: development | production
 - MongoDB
 
 ```bash
-ENV=development
+SYS_ENV=development
 MONGODB_URI=
 ```
 
