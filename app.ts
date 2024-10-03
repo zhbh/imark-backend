@@ -13,6 +13,9 @@ import usersRouter from "./routes/user";
 import categoryRouter from "./routes/category";
 import favoriteRouter from "./routes/favorite";
 
+import dotenv from "dotenv";
+dotenv.configDotenv();
+
 var app = express();
 
 // view engine setup
@@ -29,19 +32,19 @@ app.use(
     secret: "abc123",
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 24 * 1000 },
+    cookie: { secure: process.env.NODE_ENV === "production", maxAge: 60 * 60 * 24 * 1000 },
   })
 );
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  const referer = req.get('Referer'); 
+  const referer = req.get('Referer');
   if (!referer) {
     res.send({ message: 'Referer is empty.' });
     return;
   }
 
   const path = new URL(referer);
-  console.log("🚀 ~ app.use ~ path :", path )
+  console.log("🚀 ~ app.use ~ path :", path)
 
   if (!(path.pathname === "/") && !req.url.includes("/login") && !req.url.includes("/logout") && !req.url.includes("/register")) {
     if (!(req.session as any).user) {
